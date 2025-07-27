@@ -83,7 +83,7 @@ const login = () => {
 
   // TODO: Add actual API login and navigation logic here
   setTimeout(() => {
-    router.push('/admin-dashboard')  // Adjust route name/path as per your route config
+    router.push('/dashboard')  // Adjust route name/path as per your route config
   }, 1000)
 }
 </script>

@@ -1,48 +1,24 @@
 <template>
-  <div class="p-4">
-    <Card class="shadow-3 border-round-xl">
-      <template #title>
-        🎵 Music Library
-      </template>
-
-      <template #content>
-        <!-- Search bar aligned right -->
-        <div class="flex justify-content-end align-items-center gap-2 mb-3">
-          <span class="p-input-icon-left w-25rem">
-            <InputText
-              v-model="globalFilter"
-              placeholder="Search all..."
-              class="w-full"
-            />
-          </span>
-          <Button
-            icon="pi pi-filter-slash"
-            rounded
-            text
-            severity="secondary"
-            @click="clearFilter"
-            v-tooltip="'Clear Search'"
-          />
+  <DataTable :filters="filters" :value="songs" paginator showGridlines :rows="10" dataKey="title"
+        filterDisplay="menu" :loading="loading" 
+        :globalFilterFields="['title', 'artist', 'composer']">
+    <template #header>
+        <div class="flex justify-end gap-2">
+            <IconField>
+                <InputIcon>
+                    <i class="pi pi-search" />
+                </InputIcon>
+                <InputText v-model="filters['global'].value" placeholder="Keyword Search" />
+            </IconField>
+            <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="clearFilter()" />
         </div>
-
-        <!-- Data Table -->
-        <DataTable
-          :value="songs"
-          :filters="filters"
-          :globalFilterFields="['title', 'artist', 'composer']"
-          paginator
-          :rows="5"
-          stripedRows
-          dataKey="title"
-          emptyMessage="No matching songs found. Try adjusting your search or filters."
-        >
-          <Column field="title" header="Title" sortable />
-          <Column field="artist" header="Artist" sortable />
-          <Column field="composer" header="Composer" sortable />
-        </DataTable>
-      </template>
-    </Card>
-  </div>
+    </template>
+    <template #empty> <p style="text-align: center;">No data found.</p> </template>
+    <template #loading> <p style="text-align: center;">Loading data. Please wait.</p> </template>
+    <Column field="title" header="Title" sortable />
+    <Column field="artist" header="Artist" sortable />
+    <Column field="composer" header="Composer" sortable />
+  </DataTable>
 </template>
 
 <script setup>
@@ -58,6 +34,7 @@ const songs = ref([
 
 // Search bar input
 const globalFilter = ref('')
+const loading = ref(false);
 
 // Filters object for PrimeVue DataTable
 const filters = ref({
@@ -72,5 +49,6 @@ watch(globalFilter, (val) => {
 // Clear filter
 function clearFilter() {
   globalFilter.value = ''
+  filters.value.global.value = ''
 }
 </script>

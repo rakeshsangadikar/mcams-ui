@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import './style.css';
+
 
 // PrimeVue & Styles
 import PrimeVue from 'primevue/config'
@@ -18,6 +20,8 @@ import Column from 'primevue/column'
 import Card from 'primevue/card'
 import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
 
 // Create and configure app
 const app = createApp(App)
@@ -35,6 +39,8 @@ app.component('DataTable', DataTable)
 app.component('Column', Column)
 app.component('Card', Card)
 app.component('Toast', Toast)
+app.component('InputIcon', InputIcon)
+app.component('IconField', IconField)
 
 // Mount app
 app.mount('#app')

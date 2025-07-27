@@ -6,7 +6,7 @@ import AdminDashboard from '../components/AdminDashboard.vue';
 const routes = [
   { path: '/', name: 'Home', component: HomePage },
   { path: '/admin', name: 'AdminLogin', component: AdminLogin },
-  { path: '/admin-dashboard', name: 'AdminDashboard', component: AdminDashboard },
+  { path: '/dashboard', name: 'AdminDashboard', component: AdminDashboard },
 ];
 
 const router = createRouter({
